@@ -11,8 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->newAction,&QAction::triggered,this,&MainWindow::newActionSlot);
     connect(ui->openAction,&QAction::triggered,this,&MainWindow::openActionSlot);
     connect(ui->action_S,&QAction::triggered,this,&MainWindow::saveActionSlot);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -57,5 +55,12 @@ void MainWindow::saveActionSlot()
         file.write(ba);
         file.close();
     }
+}
 
+void MainWindow::keyPressEvent(QKeyEvent *k)
+{
+    if( k->modifiers() == Qt::ControlModifier && k->key() == Qt::Key_S )    //Ctrl+S同时被按下
+    {
+        this->saveActionSlot();
+    }
 }
